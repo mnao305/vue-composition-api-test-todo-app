@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
-import Todo from '../views/Todo/index.vue'
+import Todo from '../views/TodoPage/index.vue'
 
 Vue.use(VueRouter)
 

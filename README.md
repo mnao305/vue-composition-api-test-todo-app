@@ -2,6 +2,30 @@
 
 ## 学習メモ
 
+### 導入
+Vue本体は2系を導入した。ここは通常通り下記コマンドでやる。
+```shell
+$ vue create project-name
+```
+
+`Please pick a preset:`と聞かれるので、`Manually select features`を選択する。  
+`Check the features needed for your project:`と導入するものを選択できるので`TypeScript`を選択する。他は適当に。  
+その後、`Use class-style component syntax?`とclassスタイル使うか？と聞かれるので`n`を押す。後は適当に。
+
+その後プロジェクトルートに行き、`@vue/composition-api`を入れる。
+```shell
+$ cd project-name
+$ npm install @vue/composition-api
+```
+
+`src/main.ts`に下記のように追加する。
+```typescript
+import Vue from 'vue';
+import VueCompositionApi from '@vue/composition-api';
+
+Vue.use(VueCompositionApi);
+```
+
 ### 基本
 ```html
 <script lang="ts">

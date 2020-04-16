@@ -1,5 +1,6 @@
 <template>
   <div>
+    <AddItemWrapper @addItem="addTodoItem" />
     <TodoList :todoList="state.todoList" />
   </div>
 </template>
@@ -7,6 +8,7 @@
 <script lang="ts">
 import { defineComponent, reactive } from '@vue/composition-api'
 import TodoList from '@/components/TodoList/index.vue'
+import AddItemWrapper from '@/components/AddItemWrapper/index.vue'
 
 export type TodoItemType = {
   id: number;
@@ -18,7 +20,8 @@ export type TodoItemType = {
 // composition-apiv0.4.0でcreateComponentからdefineComponentに名前が変わった
 export default defineComponent({
   components: {
-    TodoList
+    TodoList,
+    AddItemWrapper
   },
   setup () {
     const state = reactive({
@@ -28,7 +31,14 @@ export default defineComponent({
       state.todoList.push({ id: i, text: 'todoItem' + i, doneFlg: false })
     }
 
-    return { state }
+    /** Todoリストに追加する */
+    const addTodoItem = (text: string) => {
+      const id = state.todoList.length
+      console.log(id, text)
+      state.todoList.push({ id, text, doneFlg: false })
+    }
+
+    return { state, addTodoItem }
   }
 })
 </script>

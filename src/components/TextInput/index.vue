@@ -1,5 +1,5 @@
 <template>
-  <input type="text" @input="changeText" :value="inputText ">
+  <input type="text" v-model="inputText ">
 </template>
 
 <script lang="ts">
@@ -13,14 +13,12 @@ export default defineComponent({
     }
   },
   setup (props, { emit }) {
-    // computedを挟まないと、親でpropsの値が変わっても反映されない
-    const inputText = computed(() => props.text)
-    const changeText = (e: InputEvent) => {
-      emit('input', (e.target as HTMLInputElement).value)
-    }
+    const inputText = computed({
+      get: () => props.text,
+      set: (value) => emit('input', value)
+    })
     return {
-      inputText,
-      changeText
+      inputText
     }
   }
 })

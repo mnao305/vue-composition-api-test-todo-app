@@ -66,6 +66,20 @@ export default defineComponent({
 
 `setup`関数内で`props`を使う場合、1つ目の引数にpropsが入ってくるのでそれを使う。
 
+```typescript
+  setup (props, { emit }) {
+    const inputText = computed({
+      get: () => props.text,
+      set: (value) => emit('input', value)
+    })
+    return {
+      inputText
+    }
+  }
+```
+`template`内で使いたい場合はsetup関数でreturnしてあげないといけない。  
+`props`で受け取った値を変更するような場合は↑のように、`computed`を使うとシンプルになる。
+
 ## Project setup
 ```
 npm install

@@ -80,6 +80,13 @@ export default defineComponent({
 `template`内で使いたい場合はsetup関数でreturnしてあげないといけない。  
 `props`で受け取った値を変更するような場合は↑のように、`computed`を使うとシンプルになる。
 
+`props`はリアクティブなオブジェクトだが、下記のように分割代入するとそうじゃなくなり、変更検知等できなくなるので注意。
+```typescript
+setup({ text }) {
+}
+```
+
+
 ## Project setup
 ```
 npm install

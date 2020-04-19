@@ -32,8 +32,17 @@ Vue.use(VueCompositionApi);
 import { defineComponent } from '@vue/composition-api'
 
 export default defineComponent({
-  setup () {
+  setup (props, context) {
     console.log('hello world')
+    const state = reactive({ text: 'hogefuga', coutn: 0 })
+    const countUp = () => {
+      state.count++
+    }
+    console.log(state.text)
+    return {
+      state,
+      countUp
+    }
   }
 })
 </script>
@@ -42,6 +51,16 @@ export default defineComponent({
 `defineComponent`を使うことで型推論が正しく行われる。
 
 composition-apiv0.4.0で`createComponent`から`defineComponent`に名前が変わった
+
+#### setup
+そのコンポーネントインスタンスが作られたときに発火する。
+第一引数には`props`、第二引数には`context`が渡される。
+`props`は親から渡されるデータ、`context`はVue2系での`this`に入っているようなもの（ex: emit）が入っている。
+
+Vue2系での`data`のように、リアクティブな値を定義する場合は`reactive`を使う。  
+上の例の場合、`state.text`のようにアクセスすれば`hogefuga`が返ってくる。
+
+`setup`関数内で定義した変数や関数をtemplate内で使う場合はreturnでオブジェクトを返すようにする
 
 ### props - 親から子にデータを渡す
 ```typescript
